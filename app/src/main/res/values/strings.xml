@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">AlarmApp</string>
+    <string name="id_editText">ID</string>
+    <string name="sign_in_button">Sign In</string>
+    <string name="make_account_button">Make Account</string>
+    <string name="titleFirst_textView">TextView</string>
+    <string name="makeTeam_button">Make Team</string>
+    <string name="joinTeam_button">Join Team</string>
+    <string name="makeTeam_textView">TextView</string>
+    <string name="teamName_editText">Name</string>
+    <string name="teamNameDecision_button">Button</string>
+    <string name="teamDecision_button">Button</string>
+    <string name="joinTeam_textView">TextView</string>
+    <string name="home_textView">TextView</string>
+    <string name="timeSet_button">Button</string>
+    <string name="stop_button">Button</string>
+    <string name="backTeam_button">Button</string>
 </resources>

@@ -3,4 +3,12 @@
     <string name="makeAccount_button">新規登録</string>
     <string name="signIn_button">サインイン</string>
     <string name="MakeAccount_button">新規作成</string>
+    <string name="makeTeam_textView">拍手喝采で起きよう！！！</string>
+    <string name="teamNameDecision_button">決定</string>
+    <string name="makeTeam_butto">チーム作成</string>
+    <string name="makeaccount_button">チーム作成</string>
+    <string name="joinText_button">チームに加わる</string>
+    <string name="makeTeam_button">チーム作成</string>
+    <string name="teamDecision_button">決定</string>
+    <string name="joinTeam_textView">チームに入りましょう！</string>
 </resources>

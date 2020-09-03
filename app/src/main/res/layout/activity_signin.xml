@@ -6,14 +6,54 @@
     android:layout_height="match_parent"
     tools:context=".SignIn">
 
-    <Button
-        android:id="@+id/makeAccount_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:onClick="click_makeAccount_button"
-        android:text="@string/makeAccount_button"
+    <EditText
+        android:id="@+id/id_editText"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19" />
+
+    <EditText
+        android:id="@+id/password_editText"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_editText"
+        app:layout_constraintVertical_bias="0.062" />
+
+    <Button
+        android:id="@+id/signIn_button"
+        android:layout_width="135dp"
+        android:layout_height="74dp"
+        android:text="@string/signIn_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_editText"
+        app:layout_constraintVertical_bias="0.18" />
+
+    <Button
+        android:id="@+id/makeAccount_button"
+        android:layout_width="139dp"
+        android:layout_height="86dp"
+        android:text="@string/MakeAccount_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signIn_button"
+        app:layout_constraintVertical_bias="0.32" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

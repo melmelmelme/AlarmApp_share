@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Title"></activity>
+        <activity
+            android:name=".Title"
+            android:label="@string/app_name" >
+        </activity>
         <activity android:name=".TimeSetting" />
         <activity android:name=".Success" />
         <activity android:name=".Stay" />
@@ -25,6 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

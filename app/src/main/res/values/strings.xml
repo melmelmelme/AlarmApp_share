@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AlarmApp</string>
+    <string name="makeAccount_button">新規登録</string>
 </resources>

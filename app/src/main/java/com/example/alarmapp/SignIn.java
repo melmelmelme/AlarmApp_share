@@ -3,6 +3,8 @@ package com.example.alarmapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.content.Intent;
 
 public class SignIn extends AppCompatActivity {
 
@@ -25,7 +27,10 @@ public class SignIn extends AppCompatActivity {
 
     //MakeAccount_buttonが押された時用の画面遷移関数
     //MakeAccount.javaを呼び出す？(画面遷移)
-
+    public void click_makeAccount_button(View view){
+        Intent intent = new Intent(SignIn.this, MakeAccount.class);
+        startActivity(intent);
+    }
 
 
 }

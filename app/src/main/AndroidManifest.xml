@@ -9,6 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Title"></activity>
+        <activity android:name=".TimeSetting" />
+        <activity android:name=".Success" />
+        <activity android:name=".Stay" />
+        <activity android:name=".MakeTeam" />
+        <activity android:name=".MakeAccount" />
+        <activity android:name=".JoinTeam" />
+        <activity android:name=".Home" />
+        <activity android:name=".Fail" />
         <activity android:name=".SignIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

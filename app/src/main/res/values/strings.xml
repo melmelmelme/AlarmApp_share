@@ -11,4 +11,19 @@
     <string name="makeTeam_button">チーム作成</string>
     <string name="teamDecision_button">決定</string>
     <string name="joinTeam_textView">チームに入りましょう！</string>
+    <string name="backTeam_button">寝る</string>
+    <string name="stop_buton">タイマーを止める</string>
+    <string name="home_textView">設定されたタイマーの時間</string>
+    <string name="timeSet_button">タイマーを設定する</string>
+    <string name="timeSetting_textView">タイマーの設定</string>
+    <string name="timeDecision_button">決定</string>
+    <string name="applause_textView">TextView</string>
+    <string name="applause">拍手</string>
+    <string name="successComment_textView">無事に全員起きました！！</string>
+    <string name="success_textView">おめでとう！！</string>
+    <string name="successBack_button">戻る</string>
+    <string name="fail_textView">拍手タイム終了</string>
+    <string name="failComment_textView">UNO</string>
+    <string name="failBack_button">戻る</string>
+    <string name="nameDecision_button">決定</string>
 </resources>

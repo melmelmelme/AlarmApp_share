@@ -15,7 +15,7 @@ public class Title extends AppCompatActivity {
         setContentView(R.layout.activity_title);
 
 
-        Button makeTeam_button = findViewById(R.id.makeTeam_button);
+        Button makeTeam_button = findViewById(R.id.makeAccount_button);
         makeTeam_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -26,19 +26,23 @@ public class SignIn extends AppCompatActivity {
         signIn_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_signIn = new Intent(getApplication(),Title.class);
+                Intent intent_signIn = new Intent(getApplication(), Title.class);
                 startActivity(intent_signIn);
             }
         });
+
+
+        //MakeAccount_buttonが押された時用の画面遷移関数
+        //MakeAccount.javaを呼び出す？(画面遷移)
+        Button makeAccount_button = findViewById(R.id.makeAccount_button);
+        makeAccount_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_makeAccount = new Intent(getApplication(), MakeAccount.class);
+                startActivity(intent_makeAccount);
+            }
+        });
+
     }
-
-
-
-
-
-    //MakeAccount_buttonが押された時用の画面遷移関数
-    //MakeAccount.javaを呼び出す？(画面遷移)
-
-
 
 }

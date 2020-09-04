@@ -1,13 +1,19 @@
 package com.example.alarmapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.Locale;
+
 public class TimeSetting extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,4 +31,14 @@ public class TimeSetting extends AppCompatActivity {
 
 
     }
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute){
+
+    }
+
+    public void showTimePicker(View v){
+        DialogFragment newFragment = new TimePicker();
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
 }
+
+// 参考: https://developer.android.com/guide/topics/ui/controls/pickers?hl=ja#TimePicker

@@ -18,22 +18,24 @@
         app:layout_constraintVertical_bias="0.050000012" />
 
     <Button
-        android:id="@+id/makeTeam_button"
-        android:layout_width="139dp"
-        android:layout_height="80dp"
-        android:text="チーム作成"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleFirst_textView" />
-
-    <Button
         android:id="@+id/joinTeam_button"
         android:layout_width="157dp"
         android:layout_height="62dp"
-        android:text="チームに加わる"
+        android:text="@string/joinText_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/makeTeam_button" />
+        app:layout_constraintTop_toBottomOf="@+id/makeAccount_button" />
+
+    <Button
+        android:id="@+id/makeAccount_button"
+        android:layout_width="146dp"
+        android:layout_height="82dp"
+        android:layout_marginTop="188dp"
+        android:text="@string/makeTeam_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleFirst_textView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

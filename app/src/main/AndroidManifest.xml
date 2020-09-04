@@ -13,14 +13,38 @@
             android:name=".Title"
             android:label="@string/app_name" >
         </activity>
-        <activity android:name=".TimeSetting" />
-        <activity android:name=".Success" />
-        <activity android:name=".Stay" />
-        <activity android:name=".MakeTeam" />
-        <activity android:name=".MakeAccount" />
-        <activity android:name=".JoinTeam" />
-        <activity android:name=".Home" />
-        <activity android:name=".Fail" />
+        <activity
+            android:name=".TimeSetting"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".Success"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".Stay"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".MakeTeam"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".MakeAccount"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".JoinTeam"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".Home"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".Fail"
+            android:label="@string/app_name">
+        </activity>
         <activity android:name=".SignIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

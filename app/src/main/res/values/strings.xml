@@ -26,8 +26,5 @@
     <string name="failComment_textView">UNO</string>
     <string name="failBack_button">戻る</string>
     <string name="nameDecision_button">決定</string>
-    <string name="timeSettin">時刻設定</string>
-    <string name="timerSetting">時刻設定</string>
-    <string name="timerSetting">時刻設定</string>
     <string name="timerSetting">時刻設定</string>
 </resources>

@@ -7,32 +7,17 @@
     tools:context=".TimeSetting">
 
     <EditText
-        android:id="@+id/timerSetting"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autofillHints=""
-        android:ems="10"
-        android:inputType="time"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeSetting_textView"
-        app:layout_constraintVertical_bias="0.18" />
-
-    <EditText
         android:id="@+id/maxApplause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="328dp"
+        android:autofillHints=""
         android:ems="10"
         android:inputType="numberSigned"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timerSetting"
-        app:layout_constraintVertical_bias="0.199"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/timerSetting" />
 
     <EditText
         android:id="@+id/applauseFinishTime"
@@ -70,5 +55,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.07999998" />
+
+    <Button
+        android:id="@+id/timerSetting"
+        android:layout_width="197dp"
+        android:layout_height="75dp"
+        android:text="@string/timerSetting"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeSetting_textView"
+        app:layout_constraintVertical_bias="0.103" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

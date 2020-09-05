@@ -21,6 +21,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SignIn extends AppCompatActivity {
 
+    public boolean flag = false;
+
     //FirebaseAuthのプライベートメンバ変数
     private FirebaseAuth mAuth;
 
@@ -29,6 +31,9 @@ public class SignIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin); //ここを対応するxmlファイルに変更
+        //fragの初期化
+        flag = false;
+
         //ID, パスワードをデータベースに渡す
 
         mAuth = FirebaseAuth.getInstance();
@@ -45,8 +50,10 @@ public class SignIn extends AppCompatActivity {
                 String password = ((TextView)findViewById(R.id.password_editText)).getText().toString();
                 signIn(email, password);
 
-                Intent intent_signIn = new Intent(getApplication(), Title.class);
-                startActivity(intent_signIn);
+                if(flag == true) {
+                    Intent intent_signIn = new Intent(getApplication(), Title.class);
+                    startActivity(intent_signIn);
+                }
             }
         });
 
@@ -70,8 +77,11 @@ public class SignIn extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task){
                 if(task.isSuccessful()){
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    showDialog(user.getUid());
+                    flag = true;
+                    //FirebaseUser user = mAuth.getCurrentUser();
+                    //showDialog(user.getUid());
+                }else{
+                    showDialog("ERROR!：メールアドレスかパスワードが間違っています。");
                 }
             }
 

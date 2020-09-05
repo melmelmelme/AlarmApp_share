@@ -56,9 +56,10 @@ public class MakeAccount extends AppCompatActivity {
         nameDecision_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String name = ((TextView)findViewById(R.id.name_editText)).getText().toString();
                 String email = ((TextView)findViewById(R.id.newId_editText)).getText().toString();
                 String password = ((TextView)findViewById(R.id.newPassword_editText)).getText().toString();
-                createUser(email, password);
+                createUser(name, email, password);
 
                 Intent intent_nameDecision = new Intent(getApplication(),Title.class);
                 startActivity(intent_nameDecision);
@@ -66,7 +67,7 @@ public class MakeAccount extends AppCompatActivity {
         });
     }
 
-    private void createUser(String email, String password){
+    private void createUser(String name, String email, String password){
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -78,6 +79,7 @@ public class MakeAccount extends AppCompatActivity {
         });
 
         //Cloud Firestore上にデータを格納
+        user_c.put("name", name);
         user_c.put("email", email); //ここで必要なもの入れる
         user_c.put("password", password);
         FirebaseUser user = mAuth.getCurrentUser();

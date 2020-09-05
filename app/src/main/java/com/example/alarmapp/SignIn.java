@@ -40,7 +40,7 @@ public class SignIn extends AppCompatActivity {
 
         //SignIn_buttonが押された時用の画面遷移関数
         //データベースへ渡す関数の実行
-        //Title.javaを呼び出す？(画面遷移)
+        //Title.javaを呼び出す？(画面遷移)→画面遷移はsignInメソッドへ移動(9/6)
         Button signIn_button = findViewById(R.id.signIn_button);
         signIn_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,10 +50,10 @@ public class SignIn extends AppCompatActivity {
                 String password = ((TextView)findViewById(R.id.password_editText)).getText().toString();
                 signIn(email, password);
 
-                if(flag == true) {
+                /*if(flag == true) {
                     Intent intent_signIn = new Intent(getApplication(), Title.class);
                     startActivity(intent_signIn);
-                }
+                }*/
             }
         });
 
@@ -72,6 +72,7 @@ public class SignIn extends AppCompatActivity {
 
     //onclick内に書くと引数の関係でエラーが出る。外に書くとFirebaseAuthインスタンスの初期化がうまくできているか謎
     //ログインの処理メソッド
+    //画面遷移もこちらの条件分岐に移動(9/6)
     private void signIn(String email, String password){
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>(){
             @Override
@@ -80,6 +81,8 @@ public class SignIn extends AppCompatActivity {
                     flag = true;
                     //FirebaseUser user = mAuth.getCurrentUser();
                     //showDialog(user.getUid());
+                    Intent intent_signIn = new Intent(getApplication(), Title.class);
+                    startActivity(intent_signIn);
                 }else{
                     showDialog("ERROR!：メールアドレスかパスワードが間違っています。");
                 }

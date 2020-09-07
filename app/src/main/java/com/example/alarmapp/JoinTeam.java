@@ -60,16 +60,41 @@ public class JoinTeam extends AppCompatActivity {
         });
     }
 
-    private void joinGroup(String group_name, String secret_word) {
+    private void joinGroup(final String group_name, final String secret_word) {
 
         //ドキュメントの取り出し？後々使うかもなので残す
-        DocumentReference docRef = db.collection("group").document(group_name);
+        DocumentReference docRef = db.collection("group").document(group_name);//処理落ち関係なし
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     check_word = document.get("secret_word").toString();
+                    if(secret_word.equals(check_word)){
+                        user_c.put("submember", uid); //ユーザ名かID？格納、修正必要
+
+                        db.collection("group").document(group_name)
+                           .set(user_c, SetOptions.merge())
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void avoid) {
+                                //Log.d(TAG, "DocumentSnapshot successfully written!");
+                                showDialog("参加成功");
+                                Intent intent_teamDecision = new Intent(getApplication(), Home.class);
+                                startActivity(intent_teamDecision);
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener(){
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                //Log.w(TAG, "Error writting document", e);
+                                showDialog("参加失敗");
+                            }
+                        });
+                    }else{
+                        showDialog("参加失敗");
+                    }
+                    //showDialog(check_word);
                     /*if (document.exists()) {
                         Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                     } else {
@@ -77,35 +102,11 @@ public class JoinTeam extends AppCompatActivity {
                     }
                 } else {
                     Log.d(TAG, "get failed with ", task.getException());*/
+                }else{
+                    showDialog("失敗");
                 }
             }
         });
-
-
-        if(check_word.equals(secret_word)){
-            user_c.put("submember", uid); //ユーザ名かID？格納、修正必要
-
-            db.collection("group").document(group_name)
-                    .set(user_c, SetOptions.merge())
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void avoid) {
-                            //Log.d(TAG, "DocumentSnapshot successfully written!");
-                            showDialog("参加成功");
-                            Intent intent_teamDecision = new Intent(getApplication(), Home.class);
-                            startActivity(intent_teamDecision);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener(){
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            //Log.w(TAG, "Error writting document", e);
-                            showDialog("参加失敗");
-                        }
-                    });
-        }else{
-            showDialog("参加失敗");
-        }
 
     }
 

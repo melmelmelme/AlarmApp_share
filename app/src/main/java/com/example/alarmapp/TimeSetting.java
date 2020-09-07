@@ -31,9 +31,9 @@ public class TimeSetting extends AppCompatActivity {
 
 
     }
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute){
-
-    }
+//    public void onTimeSet(TimePicker view, int hourOfDay, int minute){
+//
+//    }
 
     public void showTimePicker(View v){
         DialogFragment newFragment = new TimePicker();

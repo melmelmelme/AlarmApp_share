@@ -5,16 +5,18 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
 import java.util.Locale;
 
-public class TimePicker extends DialogFragment implements TimePickerDialog.OnTimeSetListener{
+public class TimePicker extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
 
     private static final String TAG = "time setting";
 
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final Calendar c = Calendar.getInstance();

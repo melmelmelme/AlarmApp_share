@@ -54,7 +54,7 @@ public class MakeTeam extends AppCompatActivity {
         teamNameDecision_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String group_name = ((TextView)findViewById(R.id.teamName_editText)).getText().toString();
+                String group_name = ((TextView)findViewById(R.id.newTeamName_editText)).getText().toString();
                 String secret_word = ((TextView)findViewById(R.id.secretWord_editText)).getText().toString();
                 createGroup(group_name, secret_word);
 

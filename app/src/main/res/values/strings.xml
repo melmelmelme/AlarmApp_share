@@ -37,6 +37,5 @@
     <string name="teamName_textView">チーム名</string>
     <string name="secret_textView">合言葉</string>
     <string name="newTeamName_editText">Name</string>
-    <string name="newTeamName_editText">Name</string>
     <string name="teamName_editText">Name</string>
 </resources>

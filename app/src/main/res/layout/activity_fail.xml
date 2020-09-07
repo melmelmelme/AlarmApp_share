@@ -23,7 +23,7 @@
 
     <TextView
         android:id="@+id/failComment_textView"
-        android:layout_width="336dp"
+        android:layout_width="380dp"
         android:layout_height="380dp"
         android:layout_marginTop="12dp"
         android:gravity="center"

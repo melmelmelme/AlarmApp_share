@@ -33,7 +33,10 @@
     <string name="newId_textView">新しいID</string>
     <string name="password_textView">Password(6文字以上)</string>
     <string name="Id_textView">ID</string>
-    <string name="Password_textView">Password</string>
+    <string name="Password_textView">Password</string>F
     <string name="teamName_textView">チーム名</string>
     <string name="secret_textView">合言葉</string>
+    <string name="newTeamName_editText">Name</string>
+    <string name="newTeamName_editText">Name</string>
+    <string name="teamName_editText">Name</string>
 </resources>

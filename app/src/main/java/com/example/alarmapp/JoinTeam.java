@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -51,9 +52,8 @@ public class JoinTeam extends AppCompatActivity {
         teamDecision_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ここ変更必要
                 String group_name = ((TextView)findViewById(R.id.teamName_editText)).getText().toString();
-                String secret_word = ((TextView)findViewById(R.id.secretWord_editText)).getText().toString();
+                String secret_word = ((TextView)findViewById(R.id.secret_editText)).getText().toString();
                 joinGroup(group_name, secret_word);
 
             }
@@ -82,11 +82,11 @@ public class JoinTeam extends AppCompatActivity {
         });
 
 
-        if( check_word == secret_word){
+        if(check_word.equals(secret_word)){
             user_c.put("submember", uid); //ユーザ名かID？格納、修正必要
 
             db.collection("group").document(group_name)
-                    .set(user_c)
+                    .set(user_c, SetOptions.merge())
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void avoid) {
@@ -103,6 +103,8 @@ public class JoinTeam extends AppCompatActivity {
                             showDialog("参加失敗");
                         }
                     });
+        }else{
+            showDialog("参加失敗");
         }
 
     }

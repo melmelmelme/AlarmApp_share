@@ -42,7 +42,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="28dp"
-        android:background="#ffdead"
+        android:background="@drawable/back_decision_design"
         android:text="@string/failBack_button"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -18,7 +18,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/maxApplause_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/maxApplause_textView"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/applauseFinishTime"
@@ -41,7 +42,7 @@
         android:layout_height="76dp"
         android:text="@string/timeDecision_button"
         android:textSize="24sp"
-        android:background="#ffdead"
+        android:background="@drawable/back_decision_design"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,6 +71,7 @@
         android:onClick="showTimePicker"
         android:text="@string/timerSetting"
         android:textSize="24sp"
+        android:background="@drawable/action_design"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +82,7 @@
         android:id="@+id/maxApplause_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="36dp"
         android:text="@string/maxApplause_textView"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"

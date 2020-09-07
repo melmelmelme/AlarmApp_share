@@ -27,7 +27,7 @@
         android:layout_width="156dp"
         android:layout_height="88dp"
         android:layout_marginTop="48dp"
-        android:background="#ffdead"
+        android:background="@drawable/back_decision_design"
         android:text="@string/teamNameDecision_button"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"

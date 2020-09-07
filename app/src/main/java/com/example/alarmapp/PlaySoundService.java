@@ -58,7 +58,7 @@ public class PlaySoundService extends Service implements MediaPlayer.OnCompletio
     }
 
     private Uri getVideoUri(@RawRes int resId) {
-        return Uri.parse("android.resourse://" + getPackageName() + "/" + resId);
+        return Uri.parse("android.resource://" + getPackageName() + "/" + resId);
     }
 
     // 再生が終わるたびに音量を上げてループ再生

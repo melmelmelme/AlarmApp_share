@@ -3,7 +3,7 @@
     <string name="makeAccount_button">新規登録</string>
     <string name="signIn_button">サインイン</string>
     <string name="MakeAccount_button">新規作成</string>
-    <string name="makeTeam_textView">拍手喝采で起きよう！！！</string>
+    <string name="makeTeam_textView">チームを\n作成しましょう！</string>
     <string name="teamNameDecision_button">決定</string>
     <string name="makeTeam_butto">チーム作成</string>
     <string name="makeaccount_button">チーム作成</string>
@@ -19,11 +19,11 @@
     <string name="timeDecision_button">決定</string>
     <string name="applause_textView">TextView</string>
     <string name="applause">拍手</string>
-    <string name="successComment_textView">無事に全員起きました！！</string>
+    <string name="successComment_textView">無事に全員起きました！\n今日も1日頑張るぞい！！</string>
     <string name="success_textView">おめでとう！！</string>
     <string name="successBack_button">戻る</string>
     <string name="fail_textView">拍手タイム終了</string>
-    <string name="failComment_textView">UNO</string>
+    <string name="failComment_textView">は目覚めさせることができませんでした</string>
     <string name="failBack_button">戻る</string>
     <string name="nameDecision_button">決定</string>
     <string name="timerSetting">時刻設定</string>
@@ -33,9 +33,14 @@
     <string name="newId_textView">新しいID</string>
     <string name="password_textView">Password(6文字以上)</string>
     <string name="Id_textView">ID</string>
-    <string name="Password_textView">Password</string>F
+    <string name="Password_textView">Password</string>
     <string name="teamName_textView">チーム名</string>
     <string name="secret_textView">合言葉</string>
-    <string name="newTeamName_editText">Name</string>
+    <string name="newTeamName_editText"></string>
     <string name="teamName_editText">Name</string>
+    <string name="newTeamName_textView">新しいチーム名</string>
+    <string name="secretWord_textView">合言葉</string>
+    <string name="maxApplause_textView">最大拍手回数</string>
+    <string name="applauseFinishTime_textView">拍手終了時間</string>
+    <string name="titleFirst_textView">拍手喝采で起きよう！</string>
 </resources>

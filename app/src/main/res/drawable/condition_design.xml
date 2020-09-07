@@ -3,14 +3,13 @@
     android:shape="rectangle">
 
     <!-- 背景色 -->
-    <solid android:color="#90ee90" />
+    <solid android:color="#afeeee" />
 
-    <!-- 角の丸み -->
-    <corners android:radius="10dp" />
+
 
     <!-- 枠線 width:線の幅、color:線の色 -->
     <stroke
-        android:width="2dp"
-        android:color="#2e8b57" />
+        android:width="3dp"
+        android:color="#87ceeb" />
 
 </shape>

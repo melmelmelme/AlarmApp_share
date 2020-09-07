@@ -17,7 +17,7 @@
     <string name="timeSet_button">タイマーを設定する</string>
     <string name="timeSetting_textView">タイマーの設定</string>
     <string name="timeDecision_button">決定</string>
-    <string name="applause_textView">TextView</string>
+    <string name="applause_textView">拍手でメンバーを起こそう！</string>
     <string name="applause">拍手</string>
     <string name="successComment_textView">無事に全員起きました！\n今日も1日頑張るぞい！！</string>
     <string name="success_textView">おめでとう！！</string>
@@ -43,4 +43,7 @@
     <string name="maxApplause_textView">最大拍手回数</string>
     <string name="applauseFinishTime_textView">拍手終了時間</string>
     <string name="titleFirst_textView">拍手喝采で起きよう！</string>
+    <string name="condtion_text">まだ、UNO、UTMが起きていません！</string>
+    <string name="alarmTime_text">残り334秒で拍手タイム終了</string>
+    <string name="count_text">残り256回の拍手で終了</string>
 </resources>

@@ -3,17 +3,23 @@ package com.example.alarmapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.squareup.okhttp.Cache;
+
+import java.util.Calendar;
 import java.util.Locale;
 
 public class TimeSetting extends AppCompatActivity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +30,33 @@ public class TimeSetting extends AppCompatActivity {
         timeDecision_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Context context = getApplicationContext();
+                AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                Intent intent = new Intent(context, AlarmReceiver.class);
+                PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(System.currentTimeMillis());
+                calendar.set(Calendar.HOUR_OF_DAY, 14);
+                calendar.set(Calendar.MINUTE, 40);
+
+                long alarmTimeMillis = calendar.getTimeInMillis();
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    alarmManager.setAlarmClock(new AlarmManager.AlarmClockInfo(alarmTimeMillis, null), alarmIntent);
+                } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTimeMillis, alarmIntent);
+                } else {
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTimeMillis, alarmIntent);
+                }
+
+                boolean alarmUp = (PendingIntent.getBroadcast(context, 0,
+                new Intent(context, AlarmReceiver.class), PendingIntent.FLAG_NO_CREATE) != null);
+
+                // 確認済み
+                if (alarmUp) Log.d("myTag", "Alarm is already active");
+                else Log.d("myTag", "Alarm is not active");
+
                 Intent intent_timeDecision = new Intent(getApplication(),Home.class);
                 startActivity(intent_timeDecision);
             }
@@ -31,14 +64,12 @@ public class TimeSetting extends AppCompatActivity {
 
 
     }
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute){
-
-    }
-
     public void showTimePicker(View v){
         DialogFragment newFragment = new TimePicker();
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 }
 
-// 参考: https://developer.android.com/guide/topics/ui/controls/pickers?hl=ja#TimePicker
+// 参考
+// https://developer.android.com/guide/topics/ui/controls/pickers?hl=ja#TimePicker
+// https://qiita.com/hiroaki-dev/items/e3149e0be5bfa52d6a51

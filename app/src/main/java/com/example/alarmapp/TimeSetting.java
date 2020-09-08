@@ -37,8 +37,8 @@ public class TimeSetting extends AppCompatActivity {
 
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(System.currentTimeMillis());
-                calendar.set(Calendar.HOUR_OF_DAY, 14);
-                calendar.set(Calendar.MINUTE, 40);
+                calendar.set(Calendar.HOUR_OF_DAY, 15);
+                calendar.set(Calendar.MINUTE, 46);
 
                 long alarmTimeMillis = calendar.getTimeInMillis();
 
@@ -55,7 +55,7 @@ public class TimeSetting extends AppCompatActivity {
 
                 // 確認済み
                 if (alarmUp) Log.d("myTag", "Alarm is already active");
-                else Log.d("myTag", "Alarm is not active");
+                else Log.d("myTag", "=== Alarm is not active ===");
 
                 Intent intent_timeDecision = new Intent(getApplication(),Home.class);
                 startActivity(intent_timeDecision);

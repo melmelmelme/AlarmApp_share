@@ -8,24 +8,75 @@
 
     <TextView
         android:id="@+id/applause_textView"
-        android:layout_width="338dp"
-        android:layout_height="84dp"
+        android:layout_width="380dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/title_design"
+        android:gravity="center"
         android:text="@string/applause_textView"
+        android:textColor="#000"
+        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.044" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/applause_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="88dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/applause_design"
         android:text="@string/applause"
+        android:textColor="#000"
+        android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alarmTime_text"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/condition_text"
+        android:layout_width="380dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/condition_comment_design"
+        android:gravity="center"
+        android:text="@string/condtion_text"
+        android:textColor="#000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/applause_textView" />
+
+    <TextView
+        android:id="@+id/count_text"
+        android:layout_width="380dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/condition_comment_design"
+        android:gravity="center"
+        android:text="@string/count_text"
+        android:textColor="#000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/condition_text" />
+
+    <TextView
+        android:id="@+id/alarmTime_text"
+        android:layout_width="380dp"
+        android:layout_height="76dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/condition_comment_design"
+        android:gravity="center"
+        android:text="@string/alarmTime_text"
+        android:textColor="#000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/count_text" />
 </androidx.constraintlayout.widget.ConstraintLayout>

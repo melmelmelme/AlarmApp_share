@@ -57,18 +57,18 @@
 
     <Button
         android:id="@+id/nameDecision_button"
-        android:layout_width="144dp"
-        android:layout_height="76dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="136dp"
+        android:layout_height="84dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="36dp"
         android:background="@drawable/back_decision_design"
         android:text="@string/nameDecision_button"
-        android:textSize="36sp"
+        android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.84"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newPassword_editText"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/password_textView"
@@ -79,6 +79,7 @@
         android:layout_marginTop="36dp"
         android:gravity="center"
         android:text="@string/password_textView"
+        android:textColor="#000"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -94,6 +95,7 @@
         android:layout_marginTop="36dp"
         android:gravity="center"
         android:text="@string/newId_textView"
+        android:textColor="#000"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -109,6 +111,7 @@
         android:layout_marginTop="64dp"
         android:gravity="center"
         android:text="@string/name_textView"
+        android:textColor="#000"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

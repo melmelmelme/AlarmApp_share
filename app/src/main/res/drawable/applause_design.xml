@@ -6,11 +6,12 @@
         android:width="150dp"
         android:height="150dp"/>
     <!--色-->
-    <solid android:color="#b0e0e6"/>
+    <solid android:color="#ffa500"/>
 
     <!-- 枠線 width:線の幅、color:線の色 -->
     <stroke
         android:width="3dp"
-        android:color="#87cefa" />
+        android:color="#ff8c00" />
+
 
 </shape>

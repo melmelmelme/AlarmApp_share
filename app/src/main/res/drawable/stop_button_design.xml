@@ -8,4 +8,9 @@
     <!--色-->
     <solid android:color="#ffa500"/>
 
+    <!-- 枠線 width:線の幅、color:線の色 -->
+    <stroke
+        android:width="3dp"
+        android:color="#ff8c00" />
+
 </shape>

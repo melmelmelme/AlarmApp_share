@@ -8,50 +8,93 @@
 
     <TextView
         android:id="@+id/makeTeam_textView"
-        android:layout_width="338dp"
-        android:layout_height="85dp"
+        android:layout_width="380dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/title_design"
+        android:gravity="center"
         android:text="@string/makeTeam_textView"
+        android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.050000012" />
+        app:layout_constraintVertical_bias="0.006" />
 
     <Button
         android:id="@+id/teamNameDecision_button"
-        android:layout_width="126dp"
-        android:layout_height="72dp"
+        android:layout_width="156dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/back_decision_design"
         android:text="@string/teamNameDecision_button"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/secretWord_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/secretWord_editText"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/secretWord_editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="292dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="12dp"
         android:autofillHints=""
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newTeamName_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/secretWord_textView"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/newTeamName_editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="112dp"
+        android:layout_width="292dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="12dp"
+        android:autofillHints=""
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/newTeamName_editText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/makeTeam_textView"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/newTeamName_textView" />
+
+    <TextView
+        android:id="@+id/newTeamName_textView"
+        android:layout_width="180dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/newTeamName_textView"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/makeTeam_textView" />
+
+    <TextView
+        android:id="@+id/secretWord_textView"
+        android:layout_width="88dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/secretWord_textView"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newTeamName_editText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

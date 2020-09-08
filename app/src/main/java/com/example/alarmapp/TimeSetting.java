@@ -21,10 +21,6 @@ import java.util.Locale;
 
 public class TimeSetting extends AppCompatActivity {
 
-    // FIXME
-    AlarmManager alarmManager;
-    PendingIntent alarmIntent;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,31 +31,16 @@ public class TimeSetting extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Context context = getApplicationContext();
-                alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
                 Intent intent = new Intent(context, AlarmReceiver.class);
-                alarmIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
 
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(System.currentTimeMillis());
-                calendar.set(Calendar.HOUR_OF_DAY, 7);
-                calendar.set(Calendar.MINUTE, 0);
-
+                calendar.set(Calendar.HOUR_OF_DAY, 14);
+                calendar.set(Calendar.MINUTE, 40);
 
                 long alarmTimeMillis = calendar.getTimeInMillis();
-
-//                // test
-//                if (alarmIntent != null && alarmManager != null) {
-//                    alarmManager.cancel(alarmIntent);
-//                }
-//                else Log.d("mytag", "TESTTEST");
-
-
-                boolean alarmUp2 = (PendingIntent.getBroadcast(context, 0,
-                        new Intent(context, AlarmReceiver.class), PendingIntent.FLAG_NO_CREATE) != null);
-
-                // 確認済み
-                if (alarmUp2) Log.d("myTag", "==Alarm is already active==");
-                else Log.d("myTag", "==Alarm is not active==");
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     alarmManager.setAlarmClock(new AlarmManager.AlarmClockInfo(alarmTimeMillis, null), alarmIntent);
@@ -76,9 +57,6 @@ public class TimeSetting extends AppCompatActivity {
                 if (alarmUp) Log.d("myTag", "Alarm is already active");
                 else Log.d("myTag", "Alarm is not active");
 
-
-
-
                 Intent intent_timeDecision = new Intent(getApplication(),Home.class);
                 startActivity(intent_timeDecision);
             }
@@ -86,10 +64,6 @@ public class TimeSetting extends AppCompatActivity {
 
 
     }
-//    public void onTimeSet(TimePicker view, int hourOfDay, int minute){
-//
-//    }
-
     public void showTimePicker(View v){
         DialogFragment newFragment = new TimePicker();
         newFragment.show(getSupportFragmentManager(), "timePicker");

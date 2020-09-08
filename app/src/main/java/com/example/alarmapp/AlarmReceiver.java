@@ -10,7 +10,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Log.d("myTag", "======Receiver is not active======");
+        Log.d("myTag", "======Receiver is active======"); //動作を確認
         Intent startAlarmIntent = new Intent(context, PlaySoundActivity.class);
         startAlarmIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(startAlarmIntent);

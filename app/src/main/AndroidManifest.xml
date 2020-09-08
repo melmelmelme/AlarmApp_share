@@ -15,6 +15,7 @@
             android:name=".PlaySoundService"
             android:enabled="true"
             android:exported="false" />
+        <receiver android:name=".AlarmReceiver"/>
 
         <activity android:name=".PlaySoundActivity" />
         <activity

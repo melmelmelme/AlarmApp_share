@@ -30,7 +30,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="name_textView">新しい名前</string>
-    <string name="newId_textView">新しいID</string>
+    <string name="newId_textView">新しいID(メールアドレス)</string>
     <string name="password_textView">Password(6文字以上)</string>
     <string name="Id_textView">ID</string>
     <string name="Password_textView">Password</string>
@@ -46,4 +46,9 @@
     <string name="condtion_text">まだ、UNO、UTMが起きていません！</string>
     <string name="alarmTime_text">残り334秒で拍手タイム終了</string>
     <string name="count_text">残り256回の拍手で終了</string>
+    <string name="member_condition_button">メンバーの状況</string>
+    <string name="todayRanking_button">今日のランキング</string>
+    <string name="bed_image">TODO</string>
+    <string name="count_display_textView">回</string>
+    <string name="applause_display">分</string>
 </resources>

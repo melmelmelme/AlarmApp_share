@@ -26,7 +26,7 @@
         android:id="@+id/joinTeam_button"
         android:layout_width="208dp"
         android:layout_height="80dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="36dp"
         android:background="@drawable/action_design"
         android:text="@string/joinText_button"
         android:textColor="#000"
@@ -42,14 +42,24 @@
         android:id="@+id/makeAccount_button"
         android:layout_width="208dp"
         android:layout_height="80dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/action_design"
         android:text="@string/makeTeam_button"
         android:textColor="#000"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleFirst_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/bed_image" />
+
+    <ImageView
+        android:id="@+id/bed_image"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleFirst_textView"
+        app:srcCompat="@drawable/bed_boy_wake"
+        android:contentDescription="@string/bed_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

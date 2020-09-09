@@ -30,18 +30,15 @@ public class TimeSetting extends AppCompatActivity {
         timeDecision_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context = getApplicationContext();
-                AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-                Intent intent = new Intent(context, AlarmReceiver.class);
-                PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                PendingIntent alarmIntent = getPendingIntent();
 
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(System.currentTimeMillis());
-                calendar.set(Calendar.HOUR_OF_DAY, 15);
-                calendar.set(Calendar.MINUTE, 46);
+                calendar.set(Calendar.HOUR_OF_DAY, 9);
+                calendar.set(Calendar.MINUTE, 11);
 
                 long alarmTimeMillis = calendar.getTimeInMillis();
-
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     alarmManager.setAlarmClock(new AlarmManager.AlarmClockInfo(alarmTimeMillis, null), alarmIntent);
                 } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -50,11 +47,10 @@ public class TimeSetting extends AppCompatActivity {
                     alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTimeMillis, alarmIntent);
                 }
 
-                boolean alarmUp = (PendingIntent.getBroadcast(context, 0,
-                new Intent(context, AlarmReceiver.class), PendingIntent.FLAG_NO_CREATE) != null);
+                boolean alarmUp = (getPendingIntent_NO_CREATE() != null);
 
                 // 確認済み
-                if (alarmUp) Log.d("myTag", "Alarm is already active");
+                if (alarmUp) Log.d("myTag", "=== Alarm is already active ===");
                 else Log.d("myTag", "=== Alarm is not active ===");
 
                 Intent intent_timeDecision = new Intent(getApplication(),Home.class);
@@ -67,6 +63,21 @@ public class TimeSetting extends AppCompatActivity {
     public void showTimePicker(View v){
         DialogFragment newFragment = new TimePicker();
         newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+
+    private PendingIntent getPendingIntent() {
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        intent.setClass(this, AlarmReceiver.class);
+
+        return PendingIntent.getBroadcast(this, 0, intent,
+                PendingIntent.FLAG_CANCEL_CURRENT);
+    }
+    public PendingIntent getPendingIntent_NO_CREATE() {
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        intent.setClass(this, AlarmReceiver.class);
+
+        return PendingIntent.getBroadcast(this, 0, intent,
+                PendingIntent.FLAG_NO_CREATE);
     }
 }
 

@@ -21,6 +21,9 @@ import java.util.Locale;
 
 public class TimeSetting extends AppCompatActivity {
 
+    public static int hour;
+    public static int minute;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +40,10 @@ public class TimeSetting extends AppCompatActivity {
 
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(System.currentTimeMillis());
-                calendar.set(Calendar.HOUR_OF_DAY, 20);
-                calendar.set(Calendar.MINUTE, 34);
+
+
+                calendar.set(Calendar.HOUR_OF_DAY, hour);
+                calendar.set(Calendar.MINUTE, minute);
 
                 long alarmTimeMillis = calendar.getTimeInMillis();
 
@@ -73,6 +78,10 @@ public class TimeSetting extends AppCompatActivity {
     public void showTimePicker(View v){
         DialogFragment newFragment = new TimePicker();
         newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+    public void onReturnValue(int hour_return, int minute_return) {
+        hour = hour_return;
+        minute = minute_return;
     }
 }
 

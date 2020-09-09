@@ -37,24 +37,30 @@ public class TimeSetting extends AppCompatActivity {
 
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(System.currentTimeMillis());
-                calendar.set(Calendar.HOUR_OF_DAY, 14);
-                calendar.set(Calendar.MINUTE, 40);
+                calendar.set(Calendar.HOUR_OF_DAY, 20);
+                calendar.set(Calendar.MINUTE, 34);
 
                 long alarmTimeMillis = calendar.getTimeInMillis();
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    alarmManager.setAlarmClock(new AlarmManager.AlarmClockInfo(alarmTimeMillis, null), alarmIntent);
+                if (Build.VERSION.SDK_INT >= 23) {
+//                    alarmManager.setAlarmClock(new AlarmManager.AlarmClockInfo(alarmTimeMillis, null), alarmIntent);
+                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmTimeMillis, alarmIntent);
+                    Log.d("my tag", String.valueOf(Build.VERSION.SDK_INT));
                 } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTimeMillis, alarmIntent);
+                    Log.d("my tag", "=== ver.sdk_int (2) ===");
+
                 } else {
                     alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTimeMillis, alarmIntent);
+                    Log.d("my tag", "=== ver.sdk_int (3) ===");
+
                 }
 
                 boolean alarmUp = (PendingIntent.getBroadcast(context, 0,
                 new Intent(context, AlarmReceiver.class), PendingIntent.FLAG_NO_CREATE) != null);
 
                 // 確認済み
-                if (alarmUp) Log.d("myTag", "Alarm is already active");
+                if (alarmUp) Log.d("myTag", "===== Alarm is already active =====");
                 else Log.d("myTag", "Alarm is not active");
 
                 Intent intent_timeDecision = new Intent(getApplication(),Home.class);

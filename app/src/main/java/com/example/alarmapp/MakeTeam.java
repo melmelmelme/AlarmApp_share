@@ -148,7 +148,7 @@ public class MakeTeam extends AppCompatActivity {
                     public void onSuccess(Void avoid) {
                         Log.d(TAG, "DocumentSnapshot successfully written!");
                         //showDialog("作成成功");
-                        Intent intent_teamNameDecision = new Intent(getApplication(), Home.class);
+                        Intent intent_teamNameDecision = new Intent(getApplication(), TimeSetting.class);
                         startActivity(intent_teamNameDecision);
                     }
                 })

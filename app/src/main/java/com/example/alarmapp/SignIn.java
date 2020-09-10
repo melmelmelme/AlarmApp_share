@@ -8,6 +8,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,8 +21,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class SignIn extends AppCompatActivity {
+    //パスワード照合時のフラグ
+    //public boolean flag = false;
 
-    public boolean flag = false;
+    private static final String TAG = "check_tag";
+    private  String uid;
 
     //FirebaseAuthのプライベートメンバ変数
     private FirebaseAuth mAuth;
@@ -32,10 +36,10 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin); //ここを対応するxmlファイルに変更
         //fragの初期化
-        flag = false;
+        //flag = false;
 
         //ID, パスワードをデータベースに渡す
-
+        //インスタンスの初期化
         mAuth = FirebaseAuth.getInstance();
 
         //SignIn_buttonが押された時用の画面遷移関数
@@ -78,9 +82,11 @@ public class SignIn extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task){
                 if(task.isSuccessful()){
-                    flag = true;
-                    //FirebaseUser user = mAuth.getCurrentUser();
+                    //flag = true;
                     //showDialog(user.getUid());
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    uid = user.getUid();
+                    Log.d(TAG, uid);
                     Intent intent_signIn = new Intent(getApplication(), Title.class);
                     startActivity(intent_signIn);
                 }else{

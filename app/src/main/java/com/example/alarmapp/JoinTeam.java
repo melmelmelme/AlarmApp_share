@@ -86,8 +86,8 @@ public class JoinTeam extends AppCompatActivity {
                                     public void onSuccess(Void avoid) {
                                         //Log.d(TAG, "DocumentSnapshot successfully written!");
                                         //showDialog("参加成功");
-                                        Intent intent_teamDecision = new Intent(getApplication(), Home.class);
-                                        startActivity(intent_teamDecision);
+                                        //Intent intent_teamDecision = new Intent(getApplication(), Home.class);
+                                        //startActivity(intent_teamDecision);
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener(){

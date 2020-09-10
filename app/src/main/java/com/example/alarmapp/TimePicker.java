@@ -2,19 +2,10 @@ package com.example.alarmapp;
 
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
-
 import java.util.Calendar;
-import java.util.Locale;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class TimePicker extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
 
@@ -32,8 +23,10 @@ public class TimePicker extends DialogFragment implements TimePickerDialog.OnTim
 
     @Override
     public void onTimeSet(android.widget.TimePicker timePicker, int hourOfDay, int minute) {
-        String output = String.format(Locale.JAPAN, "%2d:%2d", hourOfDay, minute);
+//        String output = String.format(Locale.JAPAN, "%2d:%2d", hourOfDay, minute);
 //        Log.i(TAG, output); // 動作確認ずみ
+        TimeSetting.hour = hourOfDay;
+        TimeSetting.minute = minute;
 
         // FIXME データベースに時間を投げる
 

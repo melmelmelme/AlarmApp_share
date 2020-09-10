@@ -53,6 +53,7 @@ public class Home extends AppCompatActivity {
                 stopAlarm();
                 // FIXME === cloud store に起床したことを表す信号を投げる ===
 
+
                 Intent intent_stop = new Intent(getApplication(),Stay.class);
                 startActivity(intent_stop);
             }

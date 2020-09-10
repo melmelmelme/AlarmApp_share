@@ -23,6 +23,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,6 +37,7 @@ public class MakeTeam extends AppCompatActivity {
 
     //データベースへのアクセス用の変数
     Map<String, Object> user_c = new HashMap<>();
+    Map<String, Object> group_c = new HashMap<>();
     Map<String, Object> member_c = new HashMap<>();
 
     //FirebaseAuthのプライベートメンバ変数
@@ -68,7 +70,15 @@ public class MakeTeam extends AppCompatActivity {
     }
 
     private void createGroup(String group_name, String secret_word) {
-        //ドキュメントの取り出し？後々使うかもなので残す
+        //Cloud Firestore上にデータを格納、グループ名はドキュメント名に
+        user_c.put("group", group_name);
+        group_c.put("secret_word", secret_word);
+        group_c.put("owner", uid);
+        group_c.put("member", Arrays.asList(uid));
+        member_c.put(uid, "false");//ここで必要なもの入れる
+
+
+        /*//ドキュメントの取り出し？後々使うかもなので残す
         DocumentReference docRef = db.collection("users").document(uid);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -88,21 +98,15 @@ public class MakeTeam extends AppCompatActivity {
                     Log.d(TAG, "get failed with ", task.getException());
                 }
             }
-        });
+        });*/
 
-        //Cloud Firestore上にデータを格納、グループ名はドキュメント名に
-        user_c.put("secret_word", secret_word);
-        user_c.put("owner", uid); //ここで必要なもの入れる
-        //user_c.put("member", document.get("name"))//あとユーザ名入れる
-        //Log.d(TAG, name_check); //これ入れると強制終了する
-
-        db.collection("group").document(group_name)
-                .set(user_c)
+        db.collection("users").document(uid)
+                .update(user_c)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void avoid) {
                         Log.d(TAG, "DocumentSnapshot successfully written!");
-                        showDialog("作成成功");
+                        //showDialog("作成成功");
                         //Intent intent_teamNameDecision = new Intent(getApplication(), Home.class);
                         //startActivity(intent_teamNameDecision);
                     }
@@ -111,7 +115,26 @@ public class MakeTeam extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.d(TAG, "Error writting document", e);
-                        showDialog("作成失敗");
+                        //showDialog("作成失敗");
+                    }
+                });
+
+        db.collection("group").document(group_name)
+                .set(group_c)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void avoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                        //showDialog("作成成功");
+                        //Intent intent_teamNameDecision = new Intent(getApplication(), Home.class);
+                        //startActivity(intent_teamNameDecision);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener(){
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG, "Error writting document", e);
+                        //showDialog("作成失敗");
                     }
                 });
 
@@ -124,7 +147,7 @@ public class MakeTeam extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void avoid) {
                         Log.d(TAG, "DocumentSnapshot successfully written!");
-                        showDialog("作成成功");
+                        //showDialog("作成成功");
                         Intent intent_teamNameDecision = new Intent(getApplication(), Home.class);
                         startActivity(intent_teamNameDecision);
                     }
@@ -133,7 +156,7 @@ public class MakeTeam extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.d(TAG, "Error writting document", e);
-                        showDialog("作成失敗");
+                        //showDialog("作成失敗");
                     }
                 });
 

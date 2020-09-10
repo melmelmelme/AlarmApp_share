@@ -22,6 +22,7 @@ public class Stay extends AppCompatActivity {
 
     //メディアプレイヤーのインスタンスの？
     private MediaPlayer mediaPlayer;
+    private float volume = 0.3f;
 
     //Cloud Firestoreのプライベートメンバ変数
     private FirebaseFirestore db;
@@ -33,15 +34,43 @@ public class Stay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stay);
 
+        mediaPlayer = MediaPlayer.create(this, R.raw.sample);
+        mediaPlayer.setVolume(volume, volume);
+        mediaPlayer.start();
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                Log.d("onCompletion", "=== active ===");
+                volume += 0.1f;
+                mediaPlayer.setVolume(volume, volume);
+                mediaPlayer.start();
+            }
+        });
+
         final Button applause_btn = findViewById(R.id.applause_button);
         applause_cnt = 0;
-        applause_btn.setOnClickListener(new View.OnClickListener(){
+        applause_btn.setOnClickListener(new View.OnClickListener() {
                                             public void onClick(View v) {
                                                 applause_cnt += 1;
-                                                if(applause_cnt == 10) Log.i(TAG, "onClick"); // 動作確認済み
+                                                if (applause_cnt == 1) {
+                                                    Log.i(TAG, "=== (cnt == 1) ==="); // 動作確認済み
+                                                    // FIXME 起きたよ～を送信
+                                                    stopAlarm(); // テスト用ストップボタン
+                                                }
                                             }
                                         }
-                                        );
+        );
+    }
+
+    private void stopAlarm() {
+        if(mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
+
+
 
         //インスタンスの初期化
         /*db = FirebaseFirestore.getInstance();
@@ -65,9 +94,6 @@ public class Stay extends AppCompatActivity {
             }
         });*/
 
-
-
-    }
 
     /*private void stopAlarm() {
             mediaPlayer.stop();

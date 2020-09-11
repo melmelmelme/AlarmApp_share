@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,7 +29,9 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class Stay extends AppCompatActivity {
@@ -54,16 +57,53 @@ public class Stay extends AppCompatActivity {
     int count = -1;
     int i;
 
+    private Handler handler = new Handler();
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            count_lud++;
+            timerText.setText("残り時間: " + dataFormat.
+                    format(initTime - count_lud*period));
+            Log.d("count_lud", String.valueOf(count_lud));
+            handler.postDelayed(this, period);
+        }
+    };
+
+    private TextView timerText;
+    private SimpleDateFormat dataFormat =
+            new SimpleDateFormat("mm:ss", Locale.JAPAN);
+
+    private int count_lud, period, initTime;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stay);
 
+        count_lud = 0;
+        period = 1000;
+        initTime = TimeSetting.applauseTime_int * 60 * 1000;
+
+        timerText = findViewById(R.id.alarmTime_text);
+        timerText.setText("残り時間: " + dataFormat.format(initTime));
+
+        handler.post(runnable);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                stopAlarm();
+                Intent intent_fail = new Intent(getApplication(), Fail.class);
+                startActivity(intent_fail);
+            }
+        }, initTime);
+
+
         //インスタンスの初期化
         db = FirebaseFirestore.getInstance();
 
-        mediaPlayer = MediaPlayer.create(this, R.raw.sample2);
+        mediaPlayer = MediaPlayer.create(this, R.raw.sample3);
         mediaPlayer.setVolume(volume, volume);
         mediaPlayer.start();
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -185,6 +225,9 @@ public class Stay extends AppCompatActivity {
                                         //カウントがメンバーの数になっていたらアラームストップ
                                         if (member_num == count) {
                                             stopAlarm();
+                                            handler.removeCallbacksAndMessages(null);
+                                            Intent intent_success = new Intent(getApplication(), Success.class);
+                                            startActivity(intent_success);
                                         }
                                     }
                                 });

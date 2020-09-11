@@ -138,7 +138,7 @@ public class JoinTeam extends AppCompatActivity {
                                     }
                                 });
 
-                        state_c.put(uid, "sleep");
+                        /*state_c.put(uid, "sleep");
                         db.collection("group").document(group_name)
                                 .collection("member").document("state")
                                 .update(state_c)
@@ -165,7 +165,7 @@ public class JoinTeam extends AppCompatActivity {
                                         //Log.w(TAG, "Error writting document", e);
                                         //showDialog("参加失敗");
                                     }
-                                });
+                                });*/
 
 
                     }else{

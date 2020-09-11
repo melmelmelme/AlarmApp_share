@@ -153,8 +153,8 @@ public class MakeTeam extends AppCompatActivity {
                     public void onSuccess(Void avoid) {
                         Log.d(TAG, "DocumentSnapshot successfully written!");
                         //showDialog("作成成功");
-                        //Intent intent_teamNameDecision = new Intent(getApplication(), TimeSetting.class);
-                        //startActivity(intent_teamNameDecision);
+                        Intent intent_teamNameDecision = new Intent(getApplication(), TimeSetting.class);
+                        startActivity(intent_teamNameDecision);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener(){
@@ -166,7 +166,7 @@ public class MakeTeam extends AppCompatActivity {
                 });
 
 
-        state_c.put(uid, "sleep");
+        /*state_c.put(uid, "sleep");
         db.collection("group").document(group_name)
                 .collection("member").document("state")
                 .set(state_c)
@@ -185,7 +185,7 @@ public class MakeTeam extends AppCompatActivity {
                         Log.d(TAG, "Error writting document", e);
                         //showDialog("作成失敗");
                     }
-                });
+                });*/
 
 
     }

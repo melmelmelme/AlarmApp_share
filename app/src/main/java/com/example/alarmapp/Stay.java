@@ -50,7 +50,8 @@ public class Stay extends AppCompatActivity {
     private  String uid = user.getUid();
 
     int applause_cnt; // 拍手回数を保持
-    int count;
+    //int count;
+    int count = -1;
     int i;
 
 
@@ -130,11 +131,78 @@ public class Stay extends AppCompatActivity {
             }
         });
 
-
-
-
+        //確定版
         //グループ名の取り出し
         DocumentReference docRef = db.collection("users").document(uid);//処理落ち関係なし
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    final String group_name = document.get("group").toString();
+
+                    //アラームの終了判定
+                    DocumentReference docRef2 = db.collection("group").document(group_name);
+                    docRef2.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                //member配列を持ってきて、アプリ内に配列として保存
+                                DocumentSnapshot document2 = task.getResult();
+                                String member = document2.get("member").toString();
+                                String new_member = member.replace("[", "").replace("]", "");
+                                final String[] member_split = new_member.split(",", 0);
+                                final int member_num = member_split.length;
+                                        /*for(i=0;i<member_num;i++){
+                                            showDialog(member_split[i]);
+                                        }*/
+                                //スナップショットの作成
+                                final DocumentReference docRef = db.collection("group").document(group_name)
+                                        .collection("member").document("member");
+                                docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                                        @Nullable FirebaseFirestoreException e) {
+                                        if (e != null) {
+                                            Log.w(TAG, "Listen failed.", e);
+                                            return;
+                                        }
+
+                                        if (snapshot != null && snapshot.exists()) {
+                                            Log.d(TAG, "Current data: " + snapshot.getData());
+                                        } else {
+                                            Log.d(TAG, "Current data: null");
+                                        }
+
+                                        //最初の一回とデータベースに変更回数分読み込まれる
+                                        count++;
+                                        /*for (i = 0; i < member_num; i++) {
+                                            //trueになってる→起きたボタン押しているとカウントアップ
+                                            if (snapshot.get(member_split[i]).toString().equals("true")) {
+                                                count++;
+                                            }
+                                        }*/
+                                        //カウントがメンバーの数になっていたらアラームストップ
+                                        if (member_num == count) {
+                                            stopAlarm();
+                                        }
+                                    }
+                                });
+                            } else {
+                                Log.d(TAG, "Error getting document");
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+
+
+
+        //失敗例、変更箇所多いので残す
+        //グループ名の取り出し
+        /*DocumentReference docRef = db.collection("users").document(uid);//処理落ち関係なし
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -171,7 +239,10 @@ public class Stay extends AppCompatActivity {
                                         String member = document2.get("member").toString();
                                         String new_member = member.replace("[", "").replace("]", "");
                                         final String[] member_split = new_member.split(",", 0);
-                                        //showDialog(member_split[0]);
+                                        final int member_num = member_split.length;
+                                        /*for(i=0;i<member_num;i++){
+                                            showDialog(member_split[i]);
+                                        }
 
                                         DocumentReference docRef3 = db.collection("group").document(group_name)
                                                 .collection("member").document("member");
@@ -179,19 +250,26 @@ public class Stay extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                                 if (task.isSuccessful()) {
+                                                    //これは動く
+                                                    for(i=0;i<member_num;i++){
+                                                        showDialog(member_split[i]);
+                                                    }
+
+                                                    //showDialog_int(member_num);
+                                                    //エラーの原因ここから
                                                     DocumentSnapshot document3 = task.getResult();
                                                     count = 0;
-                                                    for(i=0;i<member_split.length;i++) {
-                                                        String check = document3.get(member_split[i]).toString();
+                                                    for(i=0;i<member_num;i++) {
                                                         //trueになってる→起きたボタン押しているとカウントアップ
-                                                        if (check.equals("true")) {
+                                                        if (document3.get(member_split[i]).toString().equals("true")) {
                                                             count++;
                                                         }
                                                     }
                                                     //カウントがメンバーの数になっていたらアラームストップ
-                                                    if (count == member_split.length){
+                                                    if (member_num == count){
                                                         stopAlarm();
                                                     }
+                                                    //ここまで
                                                 }else{
                                                     showDialog("失敗");
                                                 }
@@ -210,7 +288,7 @@ public class Stay extends AppCompatActivity {
                     Log.d(TAG, "Error getting document");
                 }
             }
-        });
+        });*/
 
 
     }
@@ -225,6 +303,20 @@ public class Stay extends AppCompatActivity {
 
     //ログイン認証の確認ダイアログ処理
     private void showDialog(String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message);
+        builder.setPositiveButton("閉じる", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                dialog.cancel();
+            }
+        });
+        Dialog dialog = builder.create();
+        dialog.show();
+    }
+
+    //ログイン認証の確認ダイアログ処理
+    private void showDialog_int(int message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(message);
         builder.setPositiveButton("閉じる", new DialogInterface.OnClickListener(){

@@ -45,14 +45,7 @@ public class Home extends AppCompatActivity {
 
         Log.d("=== GetUpTime ===", GetUpTime);
 
-        Button timeSet_button = findViewById(R.id.timeSet_button);
-        timeSet_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent_timeSet = new Intent(getApplication(),TimeSetting.class);
-                startActivity(intent_timeSet);
-            }
-        });
+
 
         Button stop_button = findViewById(R.id.stop_button);
         stop_button.setOnClickListener(new View.OnClickListener() {

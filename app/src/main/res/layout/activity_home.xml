@@ -23,25 +23,10 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/timeSet_button"
-        android:layout_width="240dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/action_design"
-        android:text="@string/timeSet_button"
-        android:textColor="#000"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/home_textView"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
         android:id="@+id/stop_button"
-        android:layout_width="240dp"
-        android:layout_height="176dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/stop_button_design"
         android:text="@string/stop_buton"
         android:textColor="#000"
@@ -74,22 +59,22 @@
         android:id="@+id/menber_condition_button"
         android:layout_width="240dp"
         android:layout_height="60dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/action_design"
         android:text="@string/member_condition_button"
         android:textSize="24sp"
-        android:background="@drawable/action_design"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeSet_button" />
+        app:layout_constraintTop_toBottomOf="@+id/home_textView" />
 
     <Button
         android:id="@+id/todayRanking_button"
         android:layout_width="240dp"
         android:layout_height="60dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/action_design"
         android:text="@string/todayRanking_button"
         android:textSize="24sp"
-        android:background="@drawable/action_design"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menber_condition_button" />

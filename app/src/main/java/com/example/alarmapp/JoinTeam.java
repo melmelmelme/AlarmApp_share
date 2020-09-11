@@ -74,12 +74,12 @@ public class JoinTeam extends AppCompatActivity {
     private void joinGroup(final String group_name, final String secret_word) {
 
         //ドキュメントの取り出し
-        DocumentReference docRef = db.collection("group").document(group_name);//処理落ち関係なし
+        final DocumentReference docRef = db.collection("group").document(group_name);//処理落ち関係なし
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
+                    final DocumentSnapshot document = task.getResult();
                     check_word = document.get("secret_word").toString();
                     if(secret_word.equals(check_word)){
                         //グループのドキュメントの配列の追加
@@ -117,8 +117,13 @@ public class JoinTeam extends AppCompatActivity {
                                     public void onSuccess(Void avoid) {
                                         //Log.d(TAG, "DocumentSnapshot successfully written!");
                                         //showDialog("参加成功");
-                                        hour = 7; //FIXME
-                                        minute = 28; // FIXME
+
+                                        //データベースから時間を持ってくる
+                                        hour = Integer.parseInt(document.get("hour").toString()); //FIXME
+                                        minute = Integer.parseInt(document.get("minute").toString()); // FIXME
+                                        TimeSetting.applauseTime_int = Integer.parseInt(document.get("limit_time").toString()); // FIXME
+
+                                        //アラームのセット
                                         setAlarmManager(hour, minute);
                                         Intent intent_teamDecision = new Intent(getApplication(), Home.class);
                                         startActivity(intent_teamDecision);
@@ -150,6 +155,8 @@ public class JoinTeam extends AppCompatActivity {
         });
 
     }
+
+
 
     //確認ダイアログ処理
     private void showDialog(String message) {

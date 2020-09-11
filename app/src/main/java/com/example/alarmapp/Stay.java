@@ -82,6 +82,9 @@ public class Stay extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stay);
 
+        final Button getUp = findViewById(R.id.applause_button);
+        final TextView countText = findViewById(R.id.count_text);
+
         count_lud = 0;
         period = 1000;
         initTime = TimeSetting.applauseTime_int * 60 * 1000;
@@ -121,8 +124,11 @@ public class Stay extends AppCompatActivity {
         applause_btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 applause_cnt += 1;
+                countText.setText("拍手回数: " + String.valueOf(applause_cnt - 1));
                 if (applause_cnt == 1) {
                     Log.i(TAG, "=== (cnt == 1) ==="); // 動作確認済み
+
+                    getUp.setText("拍手");
                     // FIXME 起きたよ～を送信
                     //ボタン押したときの、自分は止めたよ信号
                     member_c.put(uid, "true");

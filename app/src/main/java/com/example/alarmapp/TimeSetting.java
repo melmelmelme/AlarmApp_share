@@ -21,6 +21,9 @@ import java.util.Locale;
 
 public class TimeSetting extends AppCompatActivity {
 
+    public static int hour;
+    public static int minute;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,24 +40,32 @@ public class TimeSetting extends AppCompatActivity {
 
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(System.currentTimeMillis());
-                calendar.set(Calendar.HOUR_OF_DAY, 14);
-                calendar.set(Calendar.MINUTE, 40);
+
+
+                calendar.set(Calendar.HOUR_OF_DAY, hour);
+                calendar.set(Calendar.MINUTE, minute);
 
                 long alarmTimeMillis = calendar.getTimeInMillis();
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    alarmManager.setAlarmClock(new AlarmManager.AlarmClockInfo(alarmTimeMillis, null), alarmIntent);
+                if (Build.VERSION.SDK_INT >= 23) {
+//                    alarmManager.setAlarmClock(new AlarmManager.AlarmClockInfo(alarmTimeMillis, null), alarmIntent);
+                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmTimeMillis, alarmIntent);
+                    Log.d("my tag", String.valueOf(Build.VERSION.SDK_INT));
                 } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTimeMillis, alarmIntent);
+                    Log.d("my tag", "=== ver.sdk_int (2) ===");
+
                 } else {
                     alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTimeMillis, alarmIntent);
+                    Log.d("my tag", "=== ver.sdk_int (3) ===");
+
                 }
 
                 boolean alarmUp = (PendingIntent.getBroadcast(context, 0,
                 new Intent(context, AlarmReceiver.class), PendingIntent.FLAG_NO_CREATE) != null);
 
                 // 確認済み
-                if (alarmUp) Log.d("myTag", "Alarm is already active");
+                if (alarmUp) Log.d("myTag", "===== Alarm is already active =====");
                 else Log.d("myTag", "Alarm is not active");
 
                 Intent intent_timeDecision = new Intent(getApplication(),Home.class);
@@ -67,6 +78,10 @@ public class TimeSetting extends AppCompatActivity {
     public void showTimePicker(View v){
         DialogFragment newFragment = new TimePicker();
         newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+    public void onReturnValue(int hour_return, int minute_return) {
+        hour = hour_return;
+        minute = minute_return;
     }
 }
 

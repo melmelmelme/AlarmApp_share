@@ -30,6 +30,9 @@ import java.util.Map;
 
 public class MakeAccount extends AppCompatActivity {
 
+    public boolean flag = false;
+    private  String uid;
+
     private static final String TAG = "DocSnippets";
 
     //FirebaseAuthのプライベートメンバ変数
@@ -61,42 +64,64 @@ public class MakeAccount extends AppCompatActivity {
                 String password = ((TextView)findViewById(R.id.newPassword_editText)).getText().toString();
                 createUser(name, email, password);
 
-                Intent intent_nameDecision = new Intent(getApplication(),Title.class);
-                startActivity(intent_nameDecision);
             }
         });
     }
 
     private void createUser(String name, String email, String password){
+        user_c.put("name", name);
+        user_c.put("email", email); //ここで必要なもの入れる
+        user_c.put("password", password);
+
+        //アカウントの新規作成
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    showDialog(user.getUid());
+                    //FirebaseUser user = mAuth.getCurrentUser();
+                    //showDialog(user.getUid());
+                    Log.d(TAG, "success");
                 }
             }
         });
 
-        //Cloud Firestore上にデータを格納
-        user_c.put("name", name);
-        user_c.put("email", email); //ここで必要なもの入れる
-        user_c.put("password", password);
-        FirebaseUser user = mAuth.getCurrentUser();
-        db.collection("users").document(user.getUid())
-                .set(user_c)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void avoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully written!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener(){
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writting document", e);
-                    }
-                });
+        //作成後のログイン
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>(){
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task){
+                if(task.isSuccessful()){
+                    flag = true;
+                    //FirebaseUser user = mAuth.getCurrentUser();
+                    //showDialog(user.getUid());
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    uid = user.getUid();
+                    Log.d(TAG, uid);
+                    //Intent intent_signIn = new Intent(getApplication(), Title.class);
+                    //startActivity(intent_signIn);
+
+                    //Cloud Firestore上にデータを格納
+                    db.collection("users").document(uid)
+                            .set(user_c)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void avoid) {
+                                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                                    Intent intent_nameDecision = new Intent(getApplication(),Title.class);
+                                    startActivity(intent_nameDecision);
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener(){
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w(TAG, "Error writting document", e);
+                                }
+                            });
+                }else{
+                    showDialog("ERROR!：メールアドレスかパスワードが間違っています。");
+                }
+            }
+
+        });
 
     }
 

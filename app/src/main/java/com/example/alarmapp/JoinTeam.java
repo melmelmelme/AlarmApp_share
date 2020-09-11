@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
@@ -33,6 +34,7 @@ public class JoinTeam extends AppCompatActivity {
 
     //データベースへのアクセス用の変数
     Map<String, Object> user_c = new HashMap<>();
+    Map<String, Object> member_c = new HashMap<>();
     String check_word; //group_nameのsecret_wordを取り出し
 
     //FirebaseAuthのプライベートメンバ変数
@@ -62,7 +64,7 @@ public class JoinTeam extends AppCompatActivity {
 
     private void joinGroup(final String group_name, final String secret_word) {
 
-        //ドキュメントの取り出し？後々使うかもなので残す
+        //ドキュメントの取り出し
         DocumentReference docRef = db.collection("group").document(group_name);//処理落ち関係なし
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -71,26 +73,53 @@ public class JoinTeam extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     check_word = document.get("secret_word").toString();
                     if(secret_word.equals(check_word)){
-                        user_c.put("submember", uid); //ユーザ名かID？格納、修正必要
+                        //グループのドキュメントの配列の追加
+                        DocumentReference update_arrey = db.collection("group").document(group_name);
+                        update_arrey.update("member", FieldValue.arrayUnion(uid));
 
+                        //ユーザがどのグループに入っているかの情報
+                        user_c.put("group", group_name);
+                        db.collection("users").document(uid)
+                                .update(user_c)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void avoid) {
+                                        //Log.d(TAG, "DocumentSnapshot successfully written!");
+                                        //showDialog("参加成功");
+                                        //Intent intent_teamDecision = new Intent(getApplication(), Home.class);
+                                        //startActivity(intent_teamDecision);
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener(){
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        //Log.w(TAG, "Error writting document", e);
+                                        //showDialog("参加失敗");
+                                    }
+                                });
+
+                        //グループのサブコレクションへのメンバー情報の追加
+                        member_c.put(uid, "false");
                         db.collection("group").document(group_name)
-                           .set(user_c, SetOptions.merge())
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void avoid) {
-                                //Log.d(TAG, "DocumentSnapshot successfully written!");
-                                showDialog("参加成功");
-                                Intent intent_teamDecision = new Intent(getApplication(), Home.class);
-                                startActivity(intent_teamDecision);
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener(){
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                //Log.w(TAG, "Error writting document", e);
-                                showDialog("参加失敗");
-                            }
-                        });
+                                .collection("member").document("member")
+                                .update(member_c)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void avoid) {
+                                        //Log.d(TAG, "DocumentSnapshot successfully written!");
+                                        //showDialog("参加成功");
+                                        Intent intent_teamDecision = new Intent(getApplication(), Home.class);
+                                        startActivity(intent_teamDecision);
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener(){
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        //Log.w(TAG, "Error writting document", e);
+                                        //showDialog("参加失敗");
+                                    }
+                                });
+
                     }else{
                         showDialog("参加失敗");
                     }

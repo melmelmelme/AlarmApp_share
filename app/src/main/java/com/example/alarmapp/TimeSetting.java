@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.squareup.okhttp.Cache;
 
@@ -23,6 +24,8 @@ public class TimeSetting extends AppCompatActivity {
 
     public static int hour;
     public static int minute;
+    public static int maxApplause_int;
+    public static int applauseTime_int;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +71,16 @@ public class TimeSetting extends AppCompatActivity {
                 if (alarmUp) Log.d("myTag", "===== Alarm is already active =====");
                 else Log.d("myTag", "Alarm is not active");
 
-                Intent intent_timeDecision = new Intent(getApplication(),Home.class);
+//                EditText maxApplause = findViewById(R.id.maxApplause);
+                EditText applauseTime = findViewById(R.id.applauseFinishTime);
+
+//                maxApplause_int = Integer.parseInt(maxApplause.getText().toString());
+                applauseTime_int = Integer.parseInt(applauseTime.getText().toString());
+
+
+
+
+                Intent intent_timeDecision = new Intent(getApplication(), Home.class);
                 startActivity(intent_timeDecision);
             }
         });
@@ -78,10 +90,6 @@ public class TimeSetting extends AppCompatActivity {
     public void showTimePicker(View v){
         DialogFragment newFragment = new TimePicker();
         newFragment.show(getSupportFragmentManager(), "timePicker");
-    }
-    public void onReturnValue(int hour_return, int minute_return) {
-        hour = hour_return;
-        minute = minute_return;
     }
 }
 

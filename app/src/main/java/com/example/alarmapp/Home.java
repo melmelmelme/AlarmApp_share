@@ -40,7 +40,12 @@ public class Home extends AppCompatActivity {
 //            });
 //        }
         TextView ViewGetUpTime = findViewById(R.id.home_textView);
-        String GetUpTime = "設定された時刻  " + String.valueOf(TimeSetting.hour) + ":" + String.valueOf(TimeSetting.minute);
+        String hour_str, minute_str;
+        if(TimeSetting.hour < 10) hour_str = "0" + String.valueOf(TimeSetting.hour);
+        else hour_str = String.valueOf(TimeSetting.hour);
+        if(TimeSetting.minute < 10) minute_str = "0" + String.valueOf(TimeSetting.minute);
+        else minute_str = String.valueOf(TimeSetting.minute);
+        String GetUpTime = "設定された時刻  " + hour_str + ":" + minute_str;
         ViewGetUpTime.setText(GetUpTime);
 
         Log.d("=== GetUpTime ===", GetUpTime);

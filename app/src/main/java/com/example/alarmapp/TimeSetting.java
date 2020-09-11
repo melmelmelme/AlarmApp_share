@@ -71,10 +71,10 @@ public class TimeSetting extends AppCompatActivity {
                 if (alarmUp) Log.d("myTag", "===== Alarm is already active =====");
                 else Log.d("myTag", "Alarm is not active");
 
-                EditText maxApplause = findViewById(R.id.maxApplause);
+//                EditText maxApplause = findViewById(R.id.maxApplause);
                 EditText applauseTime = findViewById(R.id.applauseFinishTime);
 
-                maxApplause_int = Integer.parseInt(maxApplause.getText().toString());
+//                maxApplause_int = Integer.parseInt(maxApplause.getText().toString());
                 applauseTime_int = Integer.parseInt(applauseTime.getText().toString());
 
 

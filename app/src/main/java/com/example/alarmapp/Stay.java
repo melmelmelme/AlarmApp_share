@@ -189,7 +189,7 @@ public class Stay extends AppCompatActivity {
                                                         }
                                                     }
                                                     //カウントがメンバーの数になっていたらアラームストップ
-                                                    if(count == member_split.length){
+                                                    if (count == member_split.length){
                                                         stopAlarm();
                                                     }
                                                 }else{

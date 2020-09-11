@@ -93,10 +93,12 @@ public class Stay extends AppCompatActivity {
         timerText.setText("残り時間: " + dataFormat.format(initTime));
 
         handler.post(runnable);
-        new Handler().postDelayed(new Runnable() {
+        final Handler startActivityHandler =  new Handler();
+        startActivityHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 stopAlarm();
+                handler.removeCallbacksAndMessages(null);
                 Intent intent_fail = new Intent(getApplication(), Fail.class);
                 startActivity(intent_fail);
             }
@@ -231,6 +233,7 @@ public class Stay extends AppCompatActivity {
                                         //カウントがメンバーの数になっていたらアラームストップ
                                         if (member_num == count) {
                                             stopAlarm();
+                                            startActivityHandler.removeCallbacksAndMessages(null);
                                             handler.removeCallbacksAndMessages(null);
                                             Intent intent_success = new Intent(getApplication(), Success.class);
                                             startActivity(intent_success);

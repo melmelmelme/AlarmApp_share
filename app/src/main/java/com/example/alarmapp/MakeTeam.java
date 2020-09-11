@@ -21,11 +21,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.example.alarmapp.TimeSetting.hour;
+import static com.example.alarmapp.TimeSetting.minute;
 
 public class MakeTeam extends AppCompatActivity {
 
@@ -39,6 +43,7 @@ public class MakeTeam extends AppCompatActivity {
     Map<String, Object> user_c = new HashMap<>();
     Map<String, Object> group_c = new HashMap<>();
     Map<String, Object> member_c = new HashMap<>();
+    Map<String, Object> state_c = new HashMap<>();
 
     //FirebaseAuthのプライベートメンバ変数
     //private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -69,7 +74,7 @@ public class MakeTeam extends AppCompatActivity {
         });
     }
 
-    private void createGroup(String group_name, String secret_word) {
+    private void createGroup(final String group_name, String secret_word) {
         //Cloud Firestore上にデータを格納、グループ名はドキュメント名に
         user_c.put("group", group_name);
         group_c.put("secret_word", secret_word);
@@ -148,6 +153,28 @@ public class MakeTeam extends AppCompatActivity {
                     public void onSuccess(Void avoid) {
                         Log.d(TAG, "DocumentSnapshot successfully written!");
                         //showDialog("作成成功");
+                        //Intent intent_teamNameDecision = new Intent(getApplication(), TimeSetting.class);
+                        //startActivity(intent_teamNameDecision);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener(){
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG, "Error writting document", e);
+                        //showDialog("作成失敗");
+                    }
+                });
+
+
+        state_c.put(uid, "sleep");
+        db.collection("group").document(group_name)
+                .collection("member").document("state")
+                .set(state_c)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void avoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                        //showDialog("作成成功");
                         Intent intent_teamNameDecision = new Intent(getApplication(), TimeSetting.class);
                         startActivity(intent_teamNameDecision);
                     }
@@ -159,6 +186,7 @@ public class MakeTeam extends AppCompatActivity {
                         //showDialog("作成失敗");
                     }
                 });
+
 
     }
 

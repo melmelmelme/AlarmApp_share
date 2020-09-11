@@ -44,6 +44,7 @@ public class JoinTeam extends AppCompatActivity {
     //データベースへのアクセス用の変数
     Map<String, Object> user_c = new HashMap<>();
     Map<String, Object> member_c = new HashMap<>();
+    Map<String, Object> state_c = new HashMap<>();
     String check_word; //group_nameのsecret_wordを取り出し
 
     //FirebaseAuthのプライベートメンバ変数
@@ -136,6 +137,36 @@ public class JoinTeam extends AppCompatActivity {
                                         //showDialog("参加失敗");
                                     }
                                 });
+
+                        state_c.put(uid, "sleep");
+                        db.collection("group").document(group_name)
+                                .collection("member").document("state")
+                                .update(state_c)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void avoid) {
+                                        //Log.d(TAG, "DocumentSnapshot successfully written!");
+                                        //showDialog("参加成功");
+
+                                        //データベースから時間を持ってくる
+                                        hour = Integer.parseInt(document.get("hour").toString()); //FIXME
+                                        minute = Integer.parseInt(document.get("minute").toString()); // FIXME
+                                        TimeSetting.applauseTime_int = Integer.parseInt(document.get("limit_time").toString()); // FIXME
+
+                                        //アラームのセット
+                                        setAlarmManager(hour, minute);
+                                        Intent intent_teamDecision = new Intent(getApplication(), Home.class);
+                                        startActivity(intent_teamDecision);
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener(){
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        //Log.w(TAG, "Error writting document", e);
+                                        //showDialog("参加失敗");
+                                    }
+                                });
+
 
                     }else{
                         showDialog("参加失敗");

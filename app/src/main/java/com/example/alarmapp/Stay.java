@@ -50,11 +50,17 @@ public class Stay extends AppCompatActivity {
     private  String uid = user.getUid();
 
     int applause_cnt; // 拍手回数を保持
+    int count;
+    int i;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stay);
+
+        //インスタンスの初期化
+        db = FirebaseFirestore.getInstance();
 
         mediaPlayer = MediaPlayer.create(this, R.raw.sample);
         mediaPlayer.setVolume(volume, volume);
@@ -97,8 +103,8 @@ public class Stay extends AppCompatActivity {
                                             public void onSuccess(Void avoid) {
                                                 Log.d(TAG, "DocumentSnapshot successfully written!");
                                                 //showDialog("作成成功");
-                                                Intent intent_teamNameDecision = new Intent(getApplication(), Home.class);
-                                                startActivity(intent_teamNameDecision);
+                                                //Intent intent_teamNameDecision = new Intent(getApplication(), Home.class);
+                                                //startActivity(intent_teamNameDecision);
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener(){
@@ -122,7 +128,7 @@ public class Stay extends AppCompatActivity {
 
 
 
-        /*//グループ名の取り出し
+        //グループ名の取り出し
         DocumentReference docRef = db.collection("users").document(uid);//処理落ち関係なし
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -150,14 +156,42 @@ public class Stay extends AppCompatActivity {
                             }
 
                             //アラームの終了判定
-                            DocumentReference docRef = db.collection("group").document(group_name);
-                            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            DocumentReference docRef2 = db.collection("group").document(group_name);
+                            docRef2.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                     if (task.isSuccessful()) {
+                                        //member配列を持ってきて、アプリ内に配列として保存
                                         DocumentSnapshot document2 = task.getResult();
                                         String member = document2.get("member").toString();
-                                        showDialog(member);
+                                        String new_member = member.replace("[", "").replace("]", "");
+                                        final String[] member_split = new_member.split(",", 0);
+                                        //showDialog(member_split[0]);
+
+                                        DocumentReference docRef3 = db.collection("group").document(group_name)
+                                                .collection("member").document("member");
+                                        docRef3.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                if (task.isSuccessful()) {
+                                                    DocumentSnapshot document3 = task.getResult();
+                                                    count = 0;
+                                                    for(i=0;i<member_split.length;i++) {
+                                                        String check = document3.get(member_split[i]).toString();
+                                                        //trueになってる→起きたボタン押しているとカウントアップ
+                                                        if (check.equals("true")) {
+                                                            count++;
+                                                        }
+                                                    }
+                                                    //カウントがメンバーの数になっていたらアラームストップ
+                                                    if(count == member_split.length){
+                                                        stopAlarm();
+                                                    }
+                                                }else{
+                                                    showDialog("失敗");
+                                                }
+                                            }
+                                        });
 
                                     } else {
                                         Log.d(TAG, "get failed with ", task.getException());
@@ -165,16 +199,13 @@ public class Stay extends AppCompatActivity {
                                 }
                             });
 
-
-
-
                         }
                     });
                 }else{
                     Log.d(TAG, "Error getting document");
                 }
             }
-        });*/
+        });
 
 
     }
@@ -200,5 +231,6 @@ public class Stay extends AppCompatActivity {
         Dialog dialog = builder.create();
         dialog.show();
     }
+
 
 }

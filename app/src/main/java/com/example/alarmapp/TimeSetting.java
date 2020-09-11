@@ -38,7 +38,7 @@ public class TimeSetting extends AppCompatActivity {
 
     public static int hour;
     public static int minute;
-    public static int maxApplause_int;
+//    public static int maxApplause_int;
     public static int applauseTime_int;
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();

@@ -62,14 +62,14 @@ public class Stay extends AppCompatActivity {
         //インスタンスの初期化
         db = FirebaseFirestore.getInstance();
 
-        mediaPlayer = MediaPlayer.create(this, R.raw.sample);
+        mediaPlayer = MediaPlayer.create(this, R.raw.sample2);
         mediaPlayer.setVolume(volume, volume);
         mediaPlayer.start();
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
-                Log.d("onCompletion", "=== active ===");
-                volume += 0.1f;
+                Log.d("onCompletion", "=== completionLister is called ===");
+//                volume += 0.1f;
                 mediaPlayer.setVolume(volume, volume);
                 mediaPlayer.start();
             }
@@ -121,6 +121,11 @@ public class Stay extends AppCompatActivity {
                     });
 
                     //stopAlarm(); // テスト用ストップボタン
+                }
+                if(applause_cnt % 30 == 0 && applause_cnt >= 30) {
+                    volume += 0.3f;
+                    if(volume > 1) volume = 1;
+                    Log.d("applause", "=== applause_cnt %= 30 ===");
                 }
             }
         });
@@ -184,7 +189,7 @@ public class Stay extends AppCompatActivity {
                                                         }
                                                     }
                                                     //カウントがメンバーの数になっていたらアラームストップ
-                                                    if(count == member_split.length){
+                                                    if (count == member_split.length){
                                                         stopAlarm();
                                                     }
                                                 }else{

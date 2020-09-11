@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AlarmApp</string>
+    <string name="app_name">ソーシャル拍手目覚まし</string>
     <string name="makeAccount_button">新規登録</string>
     <string name="signIn_button">サインイン</string>
     <string name="MakeAccount_button">新規作成</string>

@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import static java.lang.String.valueOf;
 
 public class Home extends AppCompatActivity {
 
@@ -36,6 +39,11 @@ public class Home extends AppCompatActivity {
 //                }
 //            });
 //        }
+        TextView ViewGetUpTime = findViewById(R.id.home_textView);
+        String GetUpTime = "設定された時刻  " + String.valueOf(TimeSetting.hour) + ":" + String.valueOf(TimeSetting.minute);
+        ViewGetUpTime.setText(GetUpTime);
+
+        Log.d("=== GetUpTime ===", GetUpTime);
 
         Button timeSet_button = findViewById(R.id.timeSet_button);
         timeSet_button.setOnClickListener(new View.OnClickListener() {

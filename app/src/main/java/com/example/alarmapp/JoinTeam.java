@@ -4,10 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,8 +29,12 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.example.alarmapp.TimeSetting.hour;
+import static com.example.alarmapp.TimeSetting.minute;
 
 public class JoinTeam extends AppCompatActivity {
 
@@ -108,6 +117,9 @@ public class JoinTeam extends AppCompatActivity {
                                     public void onSuccess(Void avoid) {
                                         //Log.d(TAG, "DocumentSnapshot successfully written!");
                                         //showDialog("参加成功");
+                                        hour = 7; //FIXME
+                                        minute = 28; // FIXME
+                                        setAlarmManager(hour, minute);
                                         Intent intent_teamDecision = new Intent(getApplication(), Home.class);
                                         startActivity(intent_teamDecision);
                                     }
@@ -151,5 +163,36 @@ public class JoinTeam extends AppCompatActivity {
         });
         Dialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void setAlarmManager(int hour, int minute) {
+
+        Context context = getApplicationContext();
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+
+
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+
+        long alarmTimeMillis = calendar.getTimeInMillis();
+
+        if (Build.VERSION.SDK_INT >= 23) {
+//                    alarmManager.setAlarmClock(new AlarmManager.AlarmClockInfo(alarmTimeMillis, null), alarmIntent);
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmTimeMillis, alarmIntent);
+            Log.d("my tag", String.valueOf(Build.VERSION.SDK_INT));
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, alarmTimeMillis, alarmIntent);
+            Log.d("my tag", "=== ver.sdk_int (2) ===");
+
+        } else {
+            alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTimeMillis, alarmIntent);
+            Log.d("my tag", "=== ver.sdk_int (3) ===");
+
+        }
     }
 }

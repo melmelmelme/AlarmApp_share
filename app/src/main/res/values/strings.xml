@@ -23,7 +23,7 @@
     <string name="success_textView">おめでとう！！</string>
     <string name="successBack_button">戻る</string>
     <string name="fail_textView">拍手タイム終了</string>
-    <string name="failComment_textView">鷹野 東山\nを目覚めさせる〜</string>
+    <string name="failComment_textView">鷹野 東山\n\nを目覚めさせることができませんでした・・・</string>
     <string name="failBack_button">戻る</string>
     <string name="nameDecision_button">決定</string>
     <string name="timerSetting">時刻設定</string>

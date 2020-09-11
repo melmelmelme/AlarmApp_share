@@ -11,7 +11,6 @@
     <string name="makeTeam_button">チーム作成</string>
     <string name="teamDecision_button">決定</string>
     <string name="joinTeam_textView">チームに入りましょう！</string>
-    <string name="backTeam_button">寝る</string>
     <string name="stop_buton">寝る</string>
     <string name="home_textView">設定されたタイマーの時間</string>
     <string name="timeSet_button">タイマーを設定する</string>
@@ -51,4 +50,6 @@
     <string name="bed_image">TODO</string>
     <string name="count_display_textView">回</string>
     <string name="applause_display">分</string>
+    <string name="hakusyu_boy">TODO</string>
+    <string name="hakusyu_girl">TODO</string>
 </resources>
